@@ -1,0 +1,30 @@
+GET http://localhost:8080/musicas
+
+###
+
+POST http://localhost:8080/musicas
+Content-Type: application/json
+
+{  
+        
+        "nome_musica": "Carque com muciloun",
+        "album_musica": "444 morram todos",
+        "artista_musica": "Ratue",
+        "tempo_duracao": "10:00"
+}
+
+###
+
+PUT http://localhost:8080/musicas
+Content-Type: application/json
+
+{
+    "nome_musica": ,
+        "album_musica": ,
+        "artista_musica": ,
+        "tempo_duracao":
+}
+
+###
+
+DELETE http://localhost:8080/musicas
