@@ -50,81 +50,48 @@ app.get('/musicas', async (req, res) => {
      }
 });
 
-// Mostrar tarefa por ID (rota GET com ID)
 
-app.get("/musicas/:id", async (req, res) => {
+// Deletar musica (rota DELETE)
+
+app.delete("/musicas/:id", async (req, res) => {
      try {
-          const tarefaID = req.params.id;
-          const tarefa = await database.listTarefaByID(tarefaID);
-          if (tarefa.length > 0) {
-               res.status(200).json(tarefa);
-          } else {
-               res.status(404).send("Tarefa não encontrada.");
-          }
+          const musicaId = req.params.id;
+          console.log(musicaId);
+          await database.deleteMusica(musicaId);
+          res.status(200).send("Musica deletada com sucesso.");
      } catch (error) {
-          console.error("Erro ao buscar tarefa por ID!", error);
-          res.status(500).send("Erro ao buscar tarefa por ID.");
-     }
-});
-
-// Deletar tarefa (rota DELETE)
-
-app.delete("/tarefas/:id", async (req, res) => {
-     try {
-          const tarefaID = req.params.id;
-
-          await database.deleteTarefa(tarefaID);
-          res.status(200).send("Tarefa deletada com sucesso.");
-     } catch (error) {
-          if (error.message === 'Tarefa não encontrada') {
-               res.status(404).send("Tarefa não encontrada.");
+          if (error.message === 'Musica não encontrada') {
+               res.status(404).send("Musica não encontrada.");
           } else {
-               console.error("Erro ao deletar tarefa!", error);
-               res.status(500).send("Erro ao deletar tarefa.");
+               console.error("Erro ao deletar Musica!", error);
+               res.status(500).send("Erro ao deletar Musica.");
           }
      }
 });
 
 
-// Atualizar tarefa (rota PUT)
-app.put('/tarefas/:id', async (req, res) => {
+// Atualizar musica (rota PUT)
+app.put('/musicas/:id', async (req, res) => {
      try {
-          const tarefaID = req.params.id;
-          const { titulo, descricao, cor, corTexto, concluido } = req.body;
+          const id_musica = req.params.id;
+          const { nome_musica, album_musica, artista_musica, tempo_duracao } = req.body;
 
           const alteracoes = {
-               titulo,
-               descricao,
-               cor,
-               corTexto,
-               concluido: concluido !== undefined ? concluido : false,
+               nome_musica,
+               album_musica,
+               artista_musica,
+               tempo_duracao,
           };
 
-          console.log('Atualizando tarefa:', tarefaID, alteracoes);
-
-          await database.updateTarefa(tarefaID, alteracoes);
-          res.status(200).send("Tarefa atualizada com sucesso.");
+          console.log('Atualizando musica:', alteracoes, id_musica);
+          await database.updateMusica(id_musica, alteracoes);
+          res.status(200).send("Musica atualizada com sucesso.");
      } catch (error) {
-          if (error.message === 'Tarefa não encontrada') {
-               res.status(404).send("Tarefa não encontrada.");
+          if (error.message === 'Musica não encontrada') {
+               res.status(404).send("Musica não encontrada.");
           } else {
-               console.error("Erro ao atualizar tarefa!", error);
-               res.status(500).send("Erro ao atualizar tarefa.");
-          }
-     }
-});
-
-app.put('/concluir/:id', async (req, res) => {
-     try {
-          const tarefaID = req.params.id;
-          await database.concluirTarefa(tarefaID);
-          res.status(200).send("Tarefa concluída com sucesso.");
-     } catch (error) {
-          if (error.message === 'Tarefa não encontrada') {
-               res.status(404).send("Tarefa não encontrada.");
-          } else {
-               console.error("Erro ao concluir tarefa!", error);
-               res.status(500).send("Erro ao concluir tarefa.");
+               console.error("Erro ao atualizar musica!", error);
+               res.status(500).send("Erro ao atualizar musica.");
           }
      }
 });

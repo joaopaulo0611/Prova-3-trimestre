@@ -7,24 +7,24 @@ Content-Type: application/json
 
 {  
         
-        "nome_musica": "Carque com muciloun",
+        "nome_musica": "333",
         "album_musica": "444 morram todos",
-        "artista_musica": "Ratue",
+        "artista_musica": "Crentue",
+        "tempo_duracao": "28:80"
+}
+
+###
+
+PUT http://localhost:8080/musicas/3
+Content-Type: application/json
+
+{
+     "nome_musica": "Carque com muciloun",
+        "album_musica": "444 morram todos",
+        "artista_musica": "bradCaoirentue",
         "tempo_duracao": "10:00"
 }
 
 ###
 
-PUT http://localhost:8080/musicas
-Content-Type: application/json
-
-{
-    "nome_musica": ,
-        "album_musica": ,
-        "artista_musica": ,
-        "tempo_duracao":
-}
-
-###
-
-DELETE http://localhost:8080/musicas
+DELETE http://localhost:8080/musica/4

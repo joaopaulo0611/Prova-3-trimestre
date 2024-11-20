@@ -16,7 +16,7 @@ export default class DatabaseMusicas {
   }
 
   async updateMusica(id, musica) {
-    const id_musica = musica.id_musica;
+   
     const nome_musica = musica.nome_musica;
     const album_musica = musica.album_musica;
     const artista_musica = musica.artista_musica;
@@ -27,12 +27,12 @@ export default class DatabaseMusicas {
       album_musica = ${album_musica},
       artista_musica = ${artista_musica},
       tempo_duracao = ${tempo_duracao}
-      where id = ${id} 
+      where id_musica = ${id} 
      `;
   }
 
   async deleteMusica(id) {
-     await sql`DELETE FROM Musicas WHERE id = ${id}`
+     await sql`DELETE FROM Musicas WHERE id_musica = ${id}`
   }
 
 }
