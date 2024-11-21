@@ -1,5 +1,7 @@
 import postgres from 'postgres';
 
+
+// configuração do db
 const sql = postgres({
   host: 'localhost',   
   port: 5432,
@@ -8,6 +10,7 @@ const sql = postgres({
   password: 'senai', 
 });
 
+// cria o db (caso não tenha)
 async function createDatabase() {
   try {
     await sql`CREATE DATABASE users;`; 

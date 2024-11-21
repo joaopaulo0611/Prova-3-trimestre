@@ -1,10 +1,16 @@
+// controller do back-end
+
+// importação 
 import express from 'express';
 import cors from 'cors';
 import DatabaseMusicas  from './database-postgres.js';
 
 const app = express();
+
+// importa a classe de musica, para pegar as funções da classe
 const database = new DatabaseMusicas();
 
+// configura o cors para não brecar meu front-end
 app.use(cors({
      origin: '*',
      methods: ['GET', 'POST', 'PUT', 'DELETE']
@@ -12,6 +18,7 @@ app.use(cors({
 
 app.use(express.json());
 
+// inicia o servidor na porta 8080
 app.listen(8080, () => {
      console.log('Servidor rodando na porta 8080');
 });
@@ -25,8 +32,8 @@ app.get("/", (req, res) => {
      return res.send("teste");
 });
 
-// Criar (rota POST)
 
+// Criar (rota POST)
 app.post('/musicas', async (req, res) => {
      try {
           const body = req.body;
@@ -38,8 +45,8 @@ app.post('/musicas', async (req, res) => {
      }
 });
 
-// Mostrar as musicas (rota GET)
 
+// Mostrar as musicas (rota GET)
 app.get('/musicas', async (req, res) => {
      try {
           const musicas = await database.listMusicas();

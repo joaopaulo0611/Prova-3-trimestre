@@ -1,5 +1,6 @@
 import { sql } from './db.js'
 
+// código em sql da tabela Musicas
 sql`
     CREATE TABLE Musicas(
         id_musica SERIAL PRIMARY KEY NOT NULL,
